@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import ndt.laptop.domain.Role;
 import ndt.laptop.domain.User;
+import ndt.laptop.domain.dto.RegisterDTO;
 import ndt.laptop.repository.RoleRepository;
 import ndt.laptop.repository.UserRepository;
 
@@ -28,8 +29,8 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public List<User> getUserByEmail(String email) {
-        return this.userRepository.findByEmail(email);
+    public List<User> getOneByEmail(String email) {
+        return this.userRepository.findOneByEmail(email);
     }
 
     public User getUserById(long id) {
@@ -46,5 +47,21 @@ public class UserService {
 
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
+
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 }

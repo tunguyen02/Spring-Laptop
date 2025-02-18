@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping("/hello")
     public String getHomePage(Model model) {
-        List<User> users = this.userService.getUserByEmail("tu@gmail.com");
+        List<User> users = this.userService.getOneByEmail("tu@gmail.com");
         System.out.println(users);
         String test = this.userService.handleHello();
         model.addAttribute("a1", test);

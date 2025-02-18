@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import ndt.laptop.service.validator.StrongPassword;
 
 @Entity
 @Table(name = "users")
@@ -26,7 +27,7 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min = 6, message = "Password must be at least 6 characters")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
     @NotNull
