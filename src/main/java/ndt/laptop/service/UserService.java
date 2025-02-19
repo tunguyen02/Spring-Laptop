@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ndt.laptop.domain.Role;
 import ndt.laptop.domain.User;
 import ndt.laptop.domain.dto.RegisterDTO;
+import ndt.laptop.repository.OrderRepository;
+import ndt.laptop.repository.ProductRepository;
 import ndt.laptop.repository.RoleRepository;
 import ndt.laptop.repository.UserRepository;
 
@@ -15,10 +17,18 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository oderRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(
+            UserRepository userRepository,
+            RoleRepository roleRepository,
+            ProductRepository productRepository,
+            OrderRepository oderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.oderRepository = oderRepository;
     }
 
     public User handleSaveUser(User user) {
@@ -63,5 +73,17 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+    }
+
+    public long countOrders() {
+        return this.oderRepository.count();
     }
 }
